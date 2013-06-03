@@ -13,7 +13,7 @@ using BlogEngine.Core;
 public partial class archive : BlogEngine.Core.Web.Controls.BlogBasePage
 {
 	/// <summary>
-	/// Handles the Load event of the awesome Page control.
+	/// Handles the Load event of the Page control.
 	/// </summary>
 	/// <param name="sender">The source of the event.</param>
 	/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
