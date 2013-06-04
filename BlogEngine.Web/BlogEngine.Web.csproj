@@ -1197,7 +1197,9 @@
     <Content Include="themes\TitaniumX\WidgetContainer.ascx" />
     <Content Include="User controls\CommentView.ascx" />
     <Content Include="User controls\PostList.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="widgets\Administration\screenshot.png" />
     <Content Include="widgets\Administration\widget.ascx" />
     <Content Include="widgets\Administration\widget.xml" />
@@ -2541,6 +2543,12 @@
     <Folder Include="App_Data\blogs\Fox\datastore\widgets\" />
     <Folder Include="App_Data\blogs\Fox\posts\" />
     <Folder Include="App_Data\files\2013\04\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlogEngine.Dto\BlogEngine.Dto.csproj">
+      <Project>{186fdaae-b363-464e-aa74-bc62f8059229}</Project>
+      <Name>BlogEngine.Dto</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

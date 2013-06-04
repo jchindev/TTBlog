@@ -3,11 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web;
+    using System.Web.Script.Serialization;
     using System.Web.Script.Services;
     using System.Web.Services;
-
     using BlogEngine.Core;
     using BlogEngine.Core.Json;
+    using BlogEngine.Dto;
 
     /// <summary>
     /// The comments.
@@ -92,6 +94,36 @@
             response.Success = true;
             response.Message = Resources.labels.pageDeleted;
             return response;
+        }
+
+        [WebMethod]
+        public void GetMostRecentPost()
+        {
+            var post = Post.Posts.OrderByDescending(p=>p.DateCreated).FirstOrDefault();
+            var postDto = new PostDto{
+                    AbsoluteLink = post.AbsoluteLink.AbsolutePath,
+                    Author = post.Author,
+                    Content = post.Content,
+                    DateCreated = post.DateCreated.ToShortDateString(),
+                    DateModified = post.DateModified.ToShortDateString(),
+                    Title = post.Title,
+                    NumComments = post.ApprovedComments.Count
+            };
+
+            var jsSerializer = new JavaScriptSerializer();
+            string strPost = jsSerializer.Serialize(postDto);
+            string callbackFunc = HttpContext.Current.Request.QueryString["callback"];
+            string result = string.Empty;
+            if (!string.IsNullOrEmpty(callbackFunc))
+            {
+                result = callbackFunc + "(" + strPost + ");";
+            }
+            else
+            {
+                result = strPost;
+            }
+
+            HttpContext.Current.Response.Write(result);
         }
 
 
